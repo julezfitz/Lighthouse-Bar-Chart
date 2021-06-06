@@ -4,6 +4,7 @@ $(document).ready(function(){
     $(".popup").hide();
     let chartTitle = $("#title").val();
     let chartTitleFont = $("#title-size").val();
+    let chartTitleColor = $('input[name=barcolour]:checked').val()
 
 
     $('<div/>',{
@@ -11,6 +12,7 @@ $(document).ready(function(){
   }).appendTo('.title');
 
   $('.title').css("font-size", chartTitleFont + "px");
+  $('.title').css("color", chartTitleColor);
 
     $('.barchart').removeClass('hidden');
   });
