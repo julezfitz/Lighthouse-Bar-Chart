@@ -1,4 +1,8 @@
-
+$(document).ready(function(){
+  $("button").click(function(){
+    $(".popup").hide();
+  });
+});
 
 // drawBarChart(data, options, element);
 // The data parameter will be the data the chart should work from Start with just an Array of numbers
