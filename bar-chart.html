@@ -25,6 +25,60 @@
       color: rgb(37, 37, 37);
       font-size: 13px;
     }
+
+    .popup {
+      background: #fff;
+      opacity: 90%;
+      border-radius: 0px;
+      width: 50%;
+      position: relative;
+      transition: all 5s ease-in-out;
+      z-index: 1;
+      top: 1em;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .flex-outer li,
+    .flex-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .flex-outer>li>label,
+    .flex-outer li p {
+      flex: 1 0 120px;
+      max-width: 220px;
+    }
+
+    .flex-outer>li>label+*,
+    .flex-inner {
+      flex: 1 0 300px;
+    }
+
+    .flex-inner li {
+      width: 120px;
+    }
+
+    .flex-inner {
+      width: 80%;
+    }
+
+    .flex-outer li button {
+  margin-left: auto;
+  padding: 8px 16px;
+  border: none;
+  background: #333;
+  color: #f2f2f2;
+  text-transform: uppercase;
+  letter-spacing: .09em;
+  border-radius: 2px;
+}
+    .spacebetween {
+      padding-right: 10px;
+    }
   </style>
 </head>
 
@@ -32,73 +86,103 @@
   <script src="jquery.js"></script>
   <script src="bar-chart.js"></script>
 
-  <h1>Customize your bar chart below</h1>
+  <div class="popup" style="border:solid 1px #ddd; padding:10px; display:block;">
 
-  <p>Bar chart title:</p>
-  <input type="text" id="title" name="title"><br>
+    <h1>Customize your bar chart:</h1>
 
-  <p>Title font size:</p>
-  <input type="number" id="title-size" name="title-size"><br>
+    <div class="flex-outer">
+      <li>
+        <p>Title:</p>
+        <input type="text" id="title" name="title">
+      </li>
+      <li>
+        <p>Title font size:</p>
+        <input type="number" id="title-size" name="title-size">
+      </li>
 
-  <p>X-axis name:</p>
-  <input type="text" id="x-axis" name="x-title"><br>
+      <li>
+        <p>X-axis name:</p>
+        <input type="text" id="x-axis" name="x-title">
+      </li>
+      <li>
+        <p>Y-axis name:</p>
+        <input type="text" id="y-axis" name="y-title">
+      </li>
 
-  <p>Y-axis name:</p>
-  <input type="text" id="y-axis" name="y-title"><br>
+      <div class="flex-inner">
+        <div class="spacebetween">
+          <p>Title font colour:</p>
+        </div>
+        <input type="radio" id="title-red" name="barcolour" value="#FF0000">
+        <label for="red">Red</label>
+        <input type="radio" id="title-black" name="barcolour" value="#000000">
+        <label for="black">Black</label>
+        <input type="radio" id="title-blue" name="barcolour" value="#6495ED">
+        <label for="blue">Blue</label>
+      </div>
 
-  <p>Title font colour:</p>
-  <input type="radio" id="title-red" name="barcolour" value="#FF0000">
-  <label for="red">Red</label>
-  <input type="radio" id="title-black" name="barcolour" value="#000000">
-  <label for="black">Black</label>
-  <input type="radio" id="title-blue" name="barcolour" value="#6495ED">
-  <label for="blue">Blue</label>
+      <div class="flex-inner">
+        <div class="spacebetween">
+          <p>Position of values (top, centre or bottom of the bar):</p>
+        </div>
+        <input type="radio" id="top" name="valpos" value="top">
+        <label for="top">Top</label>
+        <input type="radio" id="centre" name="valpos" value="centre" checked="checked">
+        <label for="centre">Centre</label>
+        <input type="radio" id="bottom" name="valpos" value="bottom">
+        <label for="bottom">Bottom</label>
+      </div>
 
-  <p>Position of values (top, centre or bottom of the bar):</p>
-  <input type="radio" id="top" name="valpos" value="top">
-  <label for="top">Top</label>
-  <input type="radio" id="centre" name="valpos" value="centre" checked="checked">
-  <label for="centre">Centre</label>
-  <input type="radio" id="bottom" name="valpos" value="bottom">
-  <label for="bottom">Bottom</label>
+      <div class="flex-inner">
+        <div class="spacebetween">
+          <p>Colour of your bars:</p>
+        </div>
+        <input type="radio" id="bar-red" name="barcolour" value="#FF0000">
+        <label for="red">Red</label>
+        <input type="radio" id="bar-yellow" name="barcolour" value="#FFBF00">
+        <label for="yellow">Yellow</label>
+        <input type="radio" id="bar-blue" name="barcolour" value="#6495ED">
+        <label for="blue">Blue</label>
+        <input type="radio" id="bar-purple" name="barcolour" value="#CCCCFF">
+        <label for="purple">Purple</label>
+        <input type="radio" id="bar-teal" name="barcolour" value="#40E0D0">
+        <label for="teal">Teal</label><br>
+      </div>
 
-  <p>Colour of your bars:</p>
-  <input type="radio" id="bar-red" name="barcolour" value="#FF0000">
-  <label for="red">Red</label>
-  <input type="radio" id="bar-yellow" name="barcolour" value="#FFBF00">
-  <label for="yellow">Yellow</label>
-  <input type="radio" id="bar-blue" name="barcolour" value="#6495ED">
-  <label for="blue">Blue</label>
-  <input type="radio" id="bar-purple" name="barcolour" value="#CCCCFF">
-  <label for="purple">Purple</label>
-  <input type="radio" id="bar-teal" name="barcolour" value="#40E0D0">
-  <label for="teal">Teal</label><br>
+      <div class="flex-inner">
+        <div class="spacebetween">
+          <p>Colour of your labels:</p>
+        </div>
+        <input type="radio" id="label-red" name="labelcolour" value="#FF0000">
+        <label for="red">Red</label>
+        <input type="radio" id="label-yellow" name="labelcolour" value="#FFBF00">
+        <label for="yellow">Yellow</label>
+        <input type="radio" id="label-blue" name="labelcolour" value="#6495ED">
+        <label for="blue">Blue</label>
+        <input type="radio" id="label-purple" name="labelcolour" value="#CCCCFF">
+        <label for="purple">Purple</label>
+        <input type="radio" id="label-teal" name="labelcolour" value="#40E0D0">
+        <label for="teal">Teal</label><br>
+      </div>
 
-  <p>Colour of your labels:</p>
-  <input type="radio" id="label-red" name="labelcolour" value="#FF0000">
-  <label for="red">Red</label>
-  <input type="radio" id="label-yellow" name="labelcolour" value="#FFBF00">
-  <label for="yellow">Yellow</label>
-  <input type="radio" id="label-blue" name="labelcolour" value="#6495ED">
-  <label for="blue">Blue</label>
-  <input type="radio" id="label-purple" name="labelcolour" value="#CCCCFF">
-  <label for="purple">Purple</label>
-  <input type="radio" id="label-teal" name="labelcolour" value="#40E0D0">
-  <label for="teal">Teal</label><br>
+      <div class="flex-inner">
+        <div class="spacebetween">
 
-  <p>Bar spacing:</p>
-  <input type="radio" id="tight" name="barspace" value="tight">
-  <label for="tight">Tight</label>
-  <input type="radio" id="medium" name="barspace" value="medium" checked="checked">
-  <label for="centre">Medium</label>
-  <input type="radio" id="wide" name="barspace" value="wide">
-  <label for="wide">Wide</label> <br>
+          <p>Bar spacing:</p>
+        </div>
+        <input type="radio" id="tight" name="barspace" value="tight">
+        <label for="tight">Tight</label>
+        <input type="radio" id="medium" name="barspace" value="medium" checked="checked">
+        <label for="centre">Medium</label>
+        <input type="radio" id="wide" name="barspace" value="wide">
+        <label for="wide">Wide</label> <br>
+      </div>
 
-  <!-- Not yet added - Bar properties that should be customizable:
-  Bar Chart axes 
--->
-  <br>
-  <button>Create My Chart</button>
+      <li>
+      <button>Create My Chart</button>
+      </li>
+    </div>
+  </div>
 </body>
 
 </html>
