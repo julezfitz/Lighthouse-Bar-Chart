@@ -3,10 +3,14 @@ $(document).ready(function(){
   $("button").click(function(){
     $(".popup").hide();
     let chartTitle = $("#title").val();
+    let chartTitleFont = $("#title-size").val();
+
 
     $('<div/>',{
       text: chartTitle,
   }).appendTo('.title');
+
+  $('.title').css("font-size", chartTitleFont + "px");
 
     $('.barchart').removeClass('hidden');
   });
