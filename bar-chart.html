@@ -80,6 +80,44 @@
     .spacebetween {
       padding-right: 10px;
     }
+
+    .container {
+      margin: 90px 100px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .barchart {
+      position: relative;
+    }
+
+    .barsarea {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: grid;
+      grid-template-rows: repeat(10, 50px);
+      grid-template-columns: 570px;
+    }
+
+    bar {
+      border: 1px solid rgb(187, 184, 184);
+    }
+
+    bar:first-child {
+      border: 1px solid rgb(187, 184, 184);
+    }
+
+    .hidden { display: none; }
+
+    .title {
+      font-size: 14px;
+      font-family: Arial, Helvetica, sans-serif;
+      color: rgb(37, 37, 37);
+      font-weight: lighter; 
+      text-align: center;       
+       }
+
   </style>
 </head>
 
@@ -94,6 +132,10 @@
     <div class="flex-outer">
       <li>
         <p>Title:</p>
+        <input type="text" id="title" name="title">
+      </li>
+      <li>
+        <p>Data set (separated by commas):</p>
         <input type="text" id="title" name="title">
       </li>
       <li>
@@ -184,6 +226,23 @@
       </li>
     </div>
   </div>
+
+  <section class="container" id = "out-chart-shell">
+    <section class="barchart hidden">
+      <section class="barsarea">
+        <div class="title"></div>
+        <bar></bar>
+        <bar></bar>
+        <bar></bar>
+        <bar></bar>
+        <bar></bar>
+        <bar></bar>
+        <bar></bar>
+        <bar></bar>
+      </section>
+    </section>
+  </section>
+
 </body>
 
 </html>
