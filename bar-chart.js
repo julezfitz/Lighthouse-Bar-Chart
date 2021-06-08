@@ -6,6 +6,8 @@ $(document).ready(function(){
     let chartTitleFont = $("#title-size").val();
     let chartTitleColor = $('input[name=barcolour]:checked').val()
     let chartX = $("#x-axis").val();
+    let chartY = $("#y-axis").val();
+
 
 
     $('<div/>',{
@@ -18,6 +20,10 @@ $(document).ready(function(){
   $('<div/>',{
     text: chartX,
 }).appendTo('.x-axis');
+
+$('<div/>',{
+  text: chartY,
+}).appendTo('.y-axis');
 
     $('.barchart').removeClass('hidden');
   });

@@ -108,26 +108,36 @@
       border: 1px solid rgb(187, 184, 184);
     }
 
-    .hidden { display: none; }
+    .hidden {
+      display: none;
+    }
 
     .title {
       font-size: 16px;
       font-family: Arial, Helvetica, sans-serif;
       color: rgb(37, 37, 37);
-      font-weight: lighter; 
-      text-align: center;       
-       }
+      font-weight: lighter;
+      text-align: center;
+    }
 
-       .x-axis {
-         padding-top: 15px;
-        font-family: Arial, Helvetica, sans-serif;
-       }
+    .x-axis {
+      padding-top: 15px;
+      font-family: Arial, Helvetica, sans-serif;
+    }
 
-       input[type="radio"] {
-        margin-left: 1em; 
-        margin-right: .4em;             
-        }
+    .y-axis {
+      padding-top: 70%;
+      font-family: Arial, Helvetica, sans-serif;
+      transform: rotate(-90deg);
+      position: absolute;
+      left: -50%;
+      top: 0px;
+    }
 
+    input[type="radio"] {
+      margin-left: 1em;
+      margin-right: .4em;
+    }
   </style>
 </head>
 
@@ -176,7 +186,7 @@
 
       <div class="flex-inner">
         <div class="spacebetween">
-          <p>Position of values (top, centre or bottom of the bar):</p>
+          <p>Position of values:</p>
         </div>
         <input type="radio" id="top" name="valpos" value="top">
         <label for="top">Top</label>
@@ -237,7 +247,7 @@
     </div>
   </div>
 
-  <section class="container" id = "out-chart-shell">
+  <section class="container" id="out-chart-shell">
     <section class="barchart hidden">
       <section class="barsarea">
         <div class="title"></div>
@@ -249,6 +259,7 @@
         <bar></bar>
         <bar></bar>
         <bar></bar>
+        <div class="y-axis"></div>
         <div class="x-axis"></div>
       </section>
     </section>
