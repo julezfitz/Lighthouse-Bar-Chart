@@ -82,25 +82,27 @@
     }
 
     .container {
-      margin: 1fr 100px;
+      margin: 70px 100px;
       width: 100%;
       text-align: center;
     }
 
     .barchart {
       position: relative;
+      width: 500px;
+      height: 600px;
     }
 
-    .barsarea {
+    .linesarea {
       position: absolute;
-      top: 0;
-      left: 0;
       height: 500px;
+      width: 500px;
       display: grid;
       grid-auto-rows: 50px;
+      z-index: -1;
     }
 
-    bar {
+    line {
       border: 1px solid rgb(187, 184, 184);
       z-index: -1;
     }
@@ -111,6 +113,7 @@
 
     .title {
       font-size: 16px;
+      height: 50px;
       font-family: Arial, Helvetica, sans-serif;
       color: rgb(37, 37, 37);
       font-weight: lighter;
@@ -120,6 +123,11 @@
     .x-axis {
       padding-top: 15px;
       font-family: Arial, Helvetica, sans-serif;
+      bottom: 0;
+      position: absolute;
+      height: 50px;
+      width: 500px;
+      text-align: center;
     }
 
     .y-axis {
@@ -128,7 +136,6 @@
       transform: rotate(-90deg);
       position: absolute;
       left: -50%;
-      top: 0px;
     }
 
     input[type="radio"] {
@@ -137,25 +144,28 @@
     }
 
     .bars {
-      flex-direction: column-reverse;
-      flex-wrap: wrap;
-      width: 400px;
+      width: 500px;
       height: 500px;
-      margin-left: 10px;
       font-family: Arial, Helvetica, sans-serif;
       color: white;
       display: flex;
-      align-items: flex-start;
+      flex-direction: row;
+      align-items: flex-end;
+      position: absolute;
+      z-index: 1;
     }
 
     .bars div {
       display: flex;
-      background-color: darkred;
-      height: 100%;
-      width: 30px;
-      margin-right: 5px;
+      background-color: rgb(18, 63, 214);
+      flex: 1;
+      border-radius: 2px;
+      border: 1px solid rgb(172, 172, 172);
+      border-bottom: none;
+    }
 
-      
+    .bars div:hover {
+      background-color: yellow;
     }
   </style>
 </head>
@@ -268,38 +278,36 @@
 
   <section class="container" id="out-chart-shell">
     <section class="barchart hidden">
-      <section class="barsarea">
-        <div class="title"></div>
-        <section class="bars">
-          <div style="height: 70%"></div>
-          <div style="height: 100%"></div>
-          <div style="height: 30%"></div>
-          <div style="height: 20%"></div>
-          <div style="height: 80%"></div>
-          <div style="height: 30%"></div>
-          <div style="height: 30%"></div>
-          <div style="height: 30%"></div>
-          <div style="height: 30%"></div>
-        </section>
-        <bar></bar>
-        <bar></bar>
-        <bar></bar>
-        <bar></bar>
-        <bar></bar>
-        <bar></bar>
-        <bar></bar>
-        <bar></bar>
-        <bar></bar>
-        <bar></bar>
-        <div class="y-axis"></div>
-        <div class="x-axis"></div>
+      <section class="title"></section>
+      <div class="y-axis"></div>
 
-       
-
+      <section class="bars">
+        <div style="height: 70%"></div>
+        <div style="height: 100%"></div>
+        <div style="height: 30%"></div>
+        <div style="height: 20%"></div>
+        <div style="height: 80%"></div>
+        <div style="height: 30%"></div>
+        <div style="height: 30%"></div>
+        <div style="height: 30%"></div>
+        <div style="height: 90%"></div>
+        <div style="height: 30%"></div>
       </section>
 
-
-
+      <section class="linesarea">
+        <line></line>
+        <line></line>
+        <line></line>
+        <line></line>
+        <line></line>
+        <line></line>
+        <line></line>
+        <line></line>
+        <line></line>
+        <line></line>
+      </section>
+      
+      <section class="x-axis"></section>
     </section>
   </section>
 
