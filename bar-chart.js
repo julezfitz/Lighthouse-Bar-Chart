@@ -7,8 +7,11 @@ $(document).ready(function () {
     let chartTitleColor = $('input[name=barcolour]:checked').val()
     let chartX = $("#x-axis").val();
     let chartY = $("#y-axis").val();
-    let barSpacing = $('input[name=barspace]:checked').val()
-    let barColour = $('input[name=barcolour]:checked').val()
+    let barSpacing = $('input[name=barspace]:checked').val();
+    let barColour = $('input[name=barcolour]:checked').val();
+    let labelPosition = $('input[name=valpos]:checked').val();
+    let labelColour = $('input[name=labelcolour]:checked').val();
+
     let dataSet = $('input[name="dataset[]"]').map(function () {
       return $(this).val()
     }).get();
@@ -54,7 +57,8 @@ $(document).ready(function () {
             "border": "1px solid rgb(172, 172, 172)",
             "border-bottom": "none",
             "background-color": barColour,
-            "margin-left": barSpacing + "px"
+            "margin-left": barSpacing + "px",
+            "color": labelColour
           }
         }
 
