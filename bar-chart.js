@@ -29,6 +29,7 @@ $('<div/>',{
   });
 });
 
+//set bar width
 
 // drawBarChart(data, options, element);
 // The data parameter will be the data the chart should work from Start with just an Array of numbers

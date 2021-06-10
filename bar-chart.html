@@ -82,7 +82,7 @@
     }
 
     .container {
-      margin: 90px 100px;
+      margin: 1fr 100px;
       width: 100%;
       text-align: center;
     }
@@ -95,17 +95,14 @@
       position: absolute;
       top: 0;
       left: 0;
+      height: 500px;
       display: grid;
-      grid-template-rows: repeat(10, 50px);
-      grid-template-columns: 570px;
+      grid-auto-rows: 50px;
     }
 
     bar {
       border: 1px solid rgb(187, 184, 184);
-    }
-
-    bar:first-child {
-      border: 1px solid rgb(187, 184, 184);
+      z-index: -1;
     }
 
     .hidden {
@@ -137,6 +134,28 @@
     input[type="radio"] {
       margin-left: 1em;
       margin-right: .4em;
+    }
+
+    .bars {
+      flex-direction: column-reverse;
+      flex-wrap: wrap;
+      width: 400px;
+      height: 500px;
+      margin-left: 10px;
+      font-family: Arial, Helvetica, sans-serif;
+      color: white;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .bars div {
+      display: flex;
+      background-color: darkred;
+      height: 100%;
+      width: 30px;
+      margin-right: 5px;
+
+      
     }
   </style>
 </head>
@@ -251,6 +270,19 @@
     <section class="barchart hidden">
       <section class="barsarea">
         <div class="title"></div>
+        <section class="bars">
+          <div style="height: 70%"></div>
+          <div style="height: 100%"></div>
+          <div style="height: 30%"></div>
+          <div style="height: 20%"></div>
+          <div style="height: 80%"></div>
+          <div style="height: 30%"></div>
+          <div style="height: 30%"></div>
+          <div style="height: 30%"></div>
+          <div style="height: 30%"></div>
+        </section>
+        <bar></bar>
+        <bar></bar>
         <bar></bar>
         <bar></bar>
         <bar></bar>
@@ -261,7 +293,13 @@
         <bar></bar>
         <div class="y-axis"></div>
         <div class="x-axis"></div>
+
+       
+
       </section>
+
+
+
     </section>
   </section>
 
