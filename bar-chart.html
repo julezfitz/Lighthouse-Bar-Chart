@@ -160,6 +160,7 @@
       background-color: rgb(18, 63, 214);
       flex: 1;
       border-radius: 2px;
+      margin-left: 10px;
       border: 1px solid rgb(172, 172, 172);
       border-bottom: none;
     }
@@ -185,11 +186,11 @@
       </li>
       <li>
         <p>Data set (separated by commas):</p>
-        <input type="text" id="title" name="title">
+        <input type="text" id="data-set" name="dataset[]" placeholder="ex. 5,4,3,2,1">
       </li>
       <li>
         <p>Title font size:</p>
-        <input type="number" id="title-size" name="title-size">
+        <input type="number" id="title-size" name="title-size" placeholder="20">
       </li>
 
       <li>
@@ -207,7 +208,7 @@
         </div>
         <input type="radio" id="title-red" name="barcolour" value="#FF0000">
         <label for="red">Red</label>
-        <input type="radio" id="title-black" name="barcolour" value="#000000">
+        <input type="radio" id="title-black" name="barcolour" value="#000000" checked="checked">
         <label for="black">Black</label>
         <input type="radio" id="title-blue" name="barcolour" value="#6495ED">
         <label for="blue">Blue</label>
@@ -262,11 +263,11 @@
 
           <p>Bar spacing:</p>
         </div>
-        <input type="radio" id="tight" name="barspace" value="tight">
+        <input type="radio" id="tight" name="barspace" value="1">
         <label for="tight">Tight</label>
-        <input type="radio" id="medium" name="barspace" value="medium" checked="checked">
+        <input type="radio" id="medium" name="barspace" value="10" checked="checked">
         <label for="centre">Medium</label>
-        <input type="radio" id="wide" name="barspace" value="wide">
+        <input type="radio" id="wide" name="barspace" value="20">
         <label for="wide">Wide</label> <br>
       </div>
 
@@ -306,7 +307,7 @@
         <line></line>
         <line></line>
       </section>
-      
+
       <section class="x-axis"></section>
     </section>
   </section>

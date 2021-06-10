@@ -7,8 +7,11 @@ $(document).ready(function(){
     let chartTitleColor = $('input[name=barcolour]:checked').val()
     let chartX = $("#x-axis").val();
     let chartY = $("#y-axis").val();
-
-
+    let barSpacing = $('input[name=barspace]:checked').val()
+    let dataSet = $('input[name="dataset[]"]').map(function () {
+      return $(this).val()
+  }).get();
+  console.log(dataSet);
 
     $('<div/>',{
       text: chartTitle,
@@ -24,6 +27,8 @@ $(document).ready(function(){
 $('<div/>',{
   text: chartY,
 }).appendTo('.y-axis');
+
+$('.bars div').css("margin-left", barSpacing + "px");
 
     $('.barchart').removeClass('hidden');
   });
