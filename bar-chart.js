@@ -1,6 +1,6 @@
 
-$(document).ready(function(){
-  $("button").click(function(){
+$(document).ready(function () {
+  $("button").click(function () {
     $(".popup").hide();
     let chartTitle = $("#title").val();
     let chartTitleFont = $("#title-size").val();
@@ -8,27 +8,63 @@ $(document).ready(function(){
     let chartX = $("#x-axis").val();
     let chartY = $("#y-axis").val();
     let barSpacing = $('input[name=barspace]:checked').val()
+    let barColour = $('input[name=barcolour]:checked').val()
     let dataSet = $('input[name="dataset[]"]').map(function () {
       return $(this).val()
-  }).get();
-  console.log(dataSet);
+    }).get();
+    let dataSetNums = dataSet[0].split(',').map(Number);
+    console.log(dataSetNums);
 
-    $('<div/>',{
+    $('<div/>', {
       text: chartTitle,
-  }).appendTo('.title');
+    }).appendTo('.title');
 
-  $('.title').css("font-size", chartTitleFont + "px");
-  $('.title').css("color", chartTitleColor);
+    $('.title').css("font-size", chartTitleFont + "px");
+    $('.title').css("color", chartTitleColor);
 
-  $('<div/>',{
-    text: chartX,
-}).appendTo('.x-axis');
+    $('<div/>', {
+      text: chartX,
+    }).appendTo('.x-axis');
 
-$('<div/>',{
-  text: chartY,
-}).appendTo('.y-axis');
+    $('<div/>', {
+      text: chartY,
+    }).appendTo('.y-axis');
 
-$('.bars div').css("margin-left", barSpacing + "px");
+    let largest = 0;
+    for (i = 0; i <= dataSetNums.length; i++) {
+      if (dataSetNums[i] > largest) {
+        largest = dataSetNums[i];
+      }
+    }
+    console.log(largest);
+
+    let createBars = function () {
+      for (let i = 0; i < dataSetNums.length; i++) {
+        let heightPercentage = (dataSetNums[i] / largest) * 100;
+        console.log(heightPercentage);
+
+        let barAttributes = {
+         class: ".bars div",
+          css: {
+            "height": heightPercentage + "%",
+            "display": "flex",
+            "flex": "1",
+            "border-radius": "2px",
+            "margin-left": "10px",
+            "border": "1px solid rgb(172, 172, 172)",
+            "border-bottom": "none",
+            "background-color": barColour,
+            "margin-left": barSpacing + "px"
+          }
+        }
+
+        let $div = $("<div>", barAttributes);
+        $div.html("dfg");
+        $(".bars").append($div);
+      }
+    }
+
+    createBars();
 
     $('.barchart').removeClass('hidden');
   });
