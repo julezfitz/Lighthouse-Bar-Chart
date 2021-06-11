@@ -1,4 +1,3 @@
-
 $(document).ready(function () {
   $("button").click(function () {
     $(".popup").hide();
@@ -21,26 +20,28 @@ $(document).ready(function () {
       labelColour: $('input[name=labelcolour]:checked').val(),
     }
 
-    $( ".button" ).click(drawBarChart(dataSetNums, options));
+    let element = '.barchart';
+
+    $(".button").click(drawBarChart(dataSetNums, options, element));
   });
 });
 
-let drawBarChart = function (data, options) {
+let drawBarChart = function (data, options, element) {
 
-  $('<div/>', {
-    text: options.chartTitle,
-  }).appendTo('.title');
+  $(element).append('<section class = "title">' + options.chartTitle + '</section>');
 
-  $('.title').css("font-size", options.chartTitleFont + "px");
-  $('.title').css("color", options.chartTitleColor);
+  $('.title').css({
+    "font-size": options.chartTitleFont + "px",
+    "color": options.chartTitleColor,
+  });
 
-  $('<div/>', {
-    text: options.chartX,
-  }).appendTo('.x-axis');
+  $(element).append('<div class = "y-axis">' + options.chartY + '</div>');
 
-  $('<div/>', {
-    text: options.chartY,
-  }).appendTo('.y-axis');
+  $(element).append('<section class = "bars"></section>');
+
+  $(element).append('<section class = "linesarea"></section>');
+
+  $(element).append('<div class = "x-axis">' + options.chartX + '</div>');
 
   let largest = 0;
   for (i = 0; i <= data.length; i++) {
@@ -78,18 +79,14 @@ let drawBarChart = function (data, options) {
   let scaleSet = [largest];
   let x = 0;
   while (x < 10) {
-    scaleSet.push((scaleSet[x] - (largest/10)).toFixed(1));
+    scaleSet.push((scaleSet[x] - (largest / 10)).toFixed(1));
     x++;
   }
-console.log(scaleSet);
+  console.log(scaleSet);
 
   for (let i = 0; i < scaleSet.length - 1; i++) {
-  $('.linesarea').append('<line><h4>'+scaleSet[i]+'</h4></line>'); 
+    $('.linesarea').append('<line><h4>' + scaleSet[i] + '</h4></line>');
   }
 
   $('.barchart').removeClass('hidden');
 }
-
-// drawBarChart(data, options, element);
-
-// The element parameter should be a DOM element or jQuery element that the chart will get rendered into.

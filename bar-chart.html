@@ -114,7 +114,7 @@
       font-weight: lighter;
       text-align: start;
       display:unset;
-      color: gray
+      color: gray;
     }
 
     .hidden {
@@ -138,6 +138,7 @@
       height: 50px;
       width: 500px;
       text-align: center;
+      color: rgb(87, 86, 86);
     }
 
     .y-axis {
@@ -146,6 +147,7 @@
       transform: rotate(-90deg);
       position: absolute;
       left: -55%;
+      color: rgb(87, 86, 86);
     }
 
     input[type="radio"] {
@@ -183,6 +185,8 @@
       font-size: small;
       text-align: center!important;
       vertical-align: bottom;
+      margin-top: 2px;
+      margin-bottom: 2px;
     }
   </style>
 </head>
@@ -294,28 +298,7 @@
   </div>
 
   <section class="container" id="out-chart-shell">
-    <section class="barchart hidden">
-      <section class="title"></section>
-      <div class="y-axis"></div>
-
-      <section class="bars">
-      </section>
-
-      <section class="linesarea">
-        <!-- <line><h4>100</h4></line>
-        <line></line>
-        <line></line>
-        <line></line>
-        <line></line>
-        <line></line>
-        <line></line>
-        <line></line>
-        <line></line>
-        <line></line> -->
-      </section>
-
-      <section class="x-axis"></section>
-    </section>
+    <section class="barchart hidden"></section>
   </section>
 
 </body>
