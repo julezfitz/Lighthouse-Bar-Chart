@@ -168,6 +168,13 @@
     .bars div:hover {
       background-color: yellow!important;
     }
+
+    h3{
+      font-size: small;
+      text-align: center!important;
+      vertical-align: bottom;
+      color: white;
+    }
   </style>
 </head>
 
@@ -206,11 +213,11 @@
         <div class="spacebetween">
           <p>Title font colour:</p>
         </div>
-        <input type="radio" id="title-red" name="barcolour" value="#FF0000">
+        <input type="radio" id="title-red" name="titlecolour" value="#FF0000">
         <label for="red">Red</label>
-        <input type="radio" id="title-black" name="barcolour" value="#000000" checked="checked">
+        <input type="radio" id="title-black" name="titlecolour" value="#000000" checked="checked">
         <label for="black">Black</label>
-        <input type="radio" id="title-blue" name="barcolour" value="#6495ED">
+        <input type="radio" id="title-blue" name="titlecolour" value="#6495ED">
         <label for="blue">Blue</label>
       </div>
 
@@ -218,11 +225,11 @@
         <div class="spacebetween">
           <p>Position of values:</p>
         </div>
-        <input type="radio" id="top" name="valpos" value="top">
+        <input type="radio" id="top" name="valpos" value="flex-start">
         <label for="top">Top</label>
         <input type="radio" id="centre" name="valpos" value="center" checked="checked">
         <label for="centre">Centre</label>
-        <input type="radio" id="bottom" name="valpos" value="bottom">
+        <input type="radio" id="bottom" name="valpos" value="flex-end">
         <label for="bottom">Bottom</label>
       </div>
 

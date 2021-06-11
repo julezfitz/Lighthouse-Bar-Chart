@@ -4,7 +4,7 @@ $(document).ready(function () {
     $(".popup").hide();
     let chartTitle = $("#title").val();
     let chartTitleFont = $("#title-size").val();
-    let chartTitleColor = $('input[name=barcolour]:checked').val()
+    let chartTitleColor = $('input[name=titlecolour]:checked').val()
     let chartX = $("#x-axis").val();
     let chartY = $("#y-axis").val();
     let barSpacing = $('input[name=barspace]:checked').val();
@@ -39,12 +39,10 @@ $(document).ready(function () {
         largest = dataSetNums[i];
       }
     }
-    console.log(largest);
 
     let createBars = function () {
       for (let i = 0; i < dataSetNums.length; i++) {
         let heightPercentage = (dataSetNums[i] / largest) * 100;
-        console.log(heightPercentage);
 
         let barAttributes = {
          class: ".bars div",
@@ -58,12 +56,17 @@ $(document).ready(function () {
             "border-bottom": "none",
             "background-color": barColour,
             "margin-left": barSpacing + "px",
-            "color": labelColour
+            "color": labelColour,
+            "justify-content": "center",
+            "align-items": labelPosition
+
+            // "text-align": "center",
+            //"vertical-align": "text-bottom"
           }
         }
 
         let $div = $("<div>", barAttributes);
-        $div.html("dfg");
+        $div.html('<h3>'+dataSetNums[i]+'</h3>');
         $(".bars").append($div);
       }
     }
