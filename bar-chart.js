@@ -2,15 +2,6 @@
 $(document).ready(function () {
   $("button").click(function () {
     $(".popup").hide();
-    let chartTitle = $("#title").val();
-    let chartTitleFont = $("#title-size").val();
-    let chartTitleColor = $('input[name=titlecolour]:checked').val()
-    let chartX = $("#x-axis").val();
-    let chartY = $("#y-axis").val();
-    let barSpacing = $('input[name=barspace]:checked').val();
-    let barColour = $('input[name=barcolour]:checked').val();
-    let labelPosition = $('input[name=valpos]:checked').val();
-    let labelColour = $('input[name=labelcolour]:checked').val();
 
     let dataSet = $('input[name="dataset[]"]').map(function () {
       return $(this).val()
@@ -18,72 +9,74 @@ $(document).ready(function () {
     let dataSetNums = dataSet[0].split(',').map(Number);
     console.log(dataSetNums);
 
-    $('<div/>', {
-      text: chartTitle,
-    }).appendTo('.title');
-
-    $('.title').css("font-size", chartTitleFont + "px");
-    $('.title').css("color", chartTitleColor);
-
-    $('<div/>', {
-      text: chartX,
-    }).appendTo('.x-axis');
-
-    $('<div/>', {
-      text: chartY,
-    }).appendTo('.y-axis');
-
-    let largest = 0;
-    for (i = 0; i <= dataSetNums.length; i++) {
-      if (dataSetNums[i] > largest) {
-        largest = dataSetNums[i];
-      }
+    let options = {
+      chartTitle: $("#title").val(),
+      chartTitleFont: $("#title-size").val(),
+      chartTitleColor: $('input[name=titlecolour]:checked').val(),
+      chartX: $("#x-axis").val(),
+      chartY: $("#y-axis").val(),
+      barSpacing: $('input[name=barspace]:checked').val(),
+      barColour: $('input[name=barcolour]:checked').val(),
+      labelPosition: $('input[name=valpos]:checked').val(),
+      labelColour: $('input[name=labelcolour]:checked').val(),
     }
 
-    let createBars = function () {
-      for (let i = 0; i < dataSetNums.length; i++) {
-        let heightPercentage = (dataSetNums[i] / largest) * 100;
-
-        let barAttributes = {
-         class: ".bars div",
-          css: {
-            "height": heightPercentage + "%",
-            "display": "flex",
-            "flex": "1",
-            "border-radius": "2px",
-            "margin-left": "10px",
-            "border": "1px solid rgb(172, 172, 172)",
-            "border-bottom": "none",
-            "background-color": barColour,
-            "margin-left": barSpacing + "px",
-            "color": labelColour,
-            "justify-content": "center",
-            "align-items": labelPosition
-
-            // "text-align": "center",
-            //"vertical-align": "text-bottom"
-          }
-        }
-
-        let $div = $("<div>", barAttributes);
-        $div.html('<h3>'+dataSetNums[i]+'</h3>');
-        $(".bars").append($div);
-      }
-    }
-
-    createBars();
-
-    $('.barchart').removeClass('hidden');
+    $( ".button" ).click(drawBarChart(dataSetNums, options));
   });
 });
 
-//set bar width
+let drawBarChart = function (data, options) {
+
+  $('<div/>', {
+    text: options.chartTitle,
+  }).appendTo('.title');
+
+  $('.title').css("font-size", options.chartTitleFont + "px");
+  $('.title').css("color", options.chartTitleColor);
+
+  $('<div/>', {
+    text: options.chartX,
+  }).appendTo('.x-axis');
+
+  $('<div/>', {
+    text: options.chartY,
+  }).appendTo('.y-axis');
+
+  let largest = 0;
+  for (i = 0; i <= data.length; i++) {
+    if (data[i] > largest) {
+      largest = data[i];
+    }
+  }
+
+  for (let i = 0; i < data.length; i++) {
+    let heightPercentage = (data[i] / largest) * 100;
+
+    let barAttributes = {
+      class: ".bars div",
+      css: {
+        "height": heightPercentage + "%",
+        "display": "flex",
+        "flex": "1",
+        "border-radius": "2px",
+        "margin-left": "10px",
+        "border": "1px solid rgb(172, 172, 172)",
+        "border-bottom": "none",
+        "background-color": options.barColour,
+        "margin-left": options.barSpacing + "px",
+        "color": options.labelColour,
+        "justify-content": "center",
+        "align-items": options.labelPosition
+      }
+    }
+
+    let $div = $("<div>", barAttributes);
+    $div.html('<h3>' + data[i] + '</h3>');
+    $(".bars").append($div);
+  }
+  $('.barchart').removeClass('hidden');
+}
 
 // drawBarChart(data, options, element);
-// The data parameter will be the data the chart should work from Start with just an Array of numbers
-// e.g. [1, 2, 3, 4, 5]
-
-// The options parameter should be an object which has options for the chart.
-// e.g. width and height of the bar chart
 
 // The element parameter should be a DOM element or jQuery element that the chart will get rendered into.
