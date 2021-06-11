@@ -78,9 +78,10 @@ let drawBarChart = function (data, options) {
   let scaleSet = [largest];
   let x = 0;
   while (x < 10) {
-    scaleSet.push(scaleSet[x] - (largest/10));
+    scaleSet.push((scaleSet[x] - (largest/10)).toFixed(1));
     x++;
   }
+console.log(scaleSet);
 
   for (let i = 0; i < scaleSet.length - 1; i++) {
   $('.linesarea').append('<line><h4>'+scaleSet[i]+'</h4></line>'); 
