@@ -2,11 +2,40 @@ $(document).ready(function () {
   $("button").click(function () {
     $(".popup").hide();
 
-    let dataSet = $('input[name="dataset[]"]').map(function () {
+    let dataSet = $('#data-set').map(function () {
       return $(this).val()
     }).get();
-    let dataSetNums = dataSet[0].split(',').map(Number);
-    console.log(dataSetNums);
+
+    let dataString = dataSet.toString();
+    let multiLineString = (dataString.split("\n"));
+    console.log(multiLineString);
+
+    let barLabels = [];
+    let barValuesArray = [];
+    for (let i = 0; i < multiLineString.length; i++) {
+      let label;
+      let output;
+      let breakPoint;
+
+      for (let j = 0; j < multiLineString[i].length; j++) {
+        label = multiLineString[i].substr(0, multiLineString[i].indexOf(':'));
+        breakPoint = multiLineString[i].split(":");
+      }
+      barLabels.push(label);
+      barValuesArray.push(breakPoint[breakPoint.length - 1]);
+    }
+
+    let finalDataSet = [];
+    let dataSetNums;
+    for (let i = 0; i < barValuesArray.length; i++) {
+      for (let j = 0; j < barValuesArray[i].length; j++) {
+        dataSetNums = barValuesArray[i].split(',').map(Number);
+      }
+      finalDataSet.push(dataSetNums);
+    }
+    
+    console.log(barLabels);
+    console.log(finalDataSet);
 
     let options = {
       chartTitle: $("#title").val(),
@@ -22,7 +51,7 @@ $(document).ready(function () {
 
     let element = '.barchart';
 
-    $(".button").click(drawBarChart(dataSetNums, options, element));
+    $(".button").click(drawBarChart(finalDataSet, options, element));
   });
 });
 
@@ -82,7 +111,6 @@ let drawBarChart = function (data, options, element) {
     scaleSet.push((scaleSet[x] - (largest / 10)).toFixed(1));
     x++;
   }
-  console.log(scaleSet);
 
   for (let i = 0; i < scaleSet.length - 1; i++) {
     $('.linesarea').append('<line><h4>' + scaleSet[i] + '</h4></line>');

@@ -117,6 +117,10 @@
       color: gray;
     }
 
+    i {
+      font-size: 12px;
+    }
+
     .hidden {
       display: none;
     }
@@ -188,6 +192,11 @@
       margin-top: 2px;
       margin-bottom: 2px;
     }
+
+    #data-set {
+      height: 50px;
+      padding-bottom: 40px;
+    }
   </style>
 </head>
 
@@ -205,9 +214,14 @@
         <input type="text" id="title" name="title">
       </li>
       <li>
-        <p>Data set (separated by commas):</p>
-        <input type="text" id="data-set" name="dataset[]" placeholder="ex. 5,4,3,2,1">
-      </li>
+        <p>Data set: <br>
+          <i>Start each line with your label, followed by the data for that bar.</i>
+        </p> 
+<!-- <input type="text" id="data-set" name="dataset[]"> -->
+<textarea id="data-set" name="dataset[]" rows="4" cols="30" placeholder="2021 : 81, 42, 11
+2020 : 21, 54, 21
+2019: 56, 11, 2"></textarea>      
+</li>
       <li>
         <p>Title font size:</p>
         <input type="number" id="title-size" name="title-size" placeholder="20">
