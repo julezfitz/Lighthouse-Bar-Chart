@@ -33,7 +33,7 @@ $(document).ready(function () {
       }
       finalDataSet.push(dataSetNums);
     }
-    
+
     console.log(barLabels);
     console.log(finalDataSet);
 
@@ -47,6 +47,7 @@ $(document).ready(function () {
       barColour: $('input[name=barcolour]:checked').val(),
       labelPosition: $('input[name=valpos]:checked').val(),
       labelColour: $('input[name=labelcolour]:checked').val(),
+      barLabels,
     }
 
     let element = '.barchart';
@@ -69,8 +70,15 @@ let drawBarChart = function (data, options, element) {
   $(element).append('<section class = "bars"></section>');
 
   $(element).append('<section class = "linesarea"></section>');
+  
+  
+  $(element).append('<div class = "x-axis"><br><br>' + options.chartX + '</div>');
 
-  $(element).append('<div class = "x-axis">' + options.chartX + '</div>');
+  $(".x-axis").append('<div class = "x-label-area"></div>');
+
+  for (let i = 0; i < options.barLabels.length; i++) {
+    $('.x-label-area').append('<div class = "label">' + options.barLabels[i] + '</div>');
+  }
 
   let largest = 0;
   for (i = 0; i <= data.length; i++) {
