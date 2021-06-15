@@ -70,8 +70,8 @@ let drawBarChart = function (data, options, element) {
   $(element).append('<section class = "bars"></section>');
 
   $(element).append('<section class = "linesarea"></section>');
-  
-  
+
+
   $(element).append('<div class = "x-axis"><br><br>' + options.chartX + '</div>');
 
   $(".x-axis").append('<div class = "x-label-area"></div>');
@@ -81,36 +81,57 @@ let drawBarChart = function (data, options, element) {
   }
 
   let largest = 0;
-  for (i = 0; i <= data.length; i++) {
-    if (data[i] > largest) {
-      largest = data[i];
+  let rowSum = 0;
+  for (let i = 0; i < data.length; i++) {
+    rowSum = 0;
+    for (let j = 0; j < data[i].length; j++) {
+      rowSum += data[i][j];
+    }
+    if (rowSum > largest) {
+      largest = rowSum;
     }
   }
 
   for (let i = 0; i < data.length; i++) {
-    let heightPercentage = (data[i] / largest) * 100;
+    let $barDiv;
+    let $stackedBar;
 
     let barAttributes = {
       class: ".bars div",
+      id: i,
       css: {
-        "height": heightPercentage + "%",
         "display": "flex",
-        "flex": "1",
-        "border-radius": "2px",
         "margin-left": "10px",
-        "border": "1px solid rgb(172, 172, 172)",
-        "border-bottom": "none",
-        "background-color": options.barColour,
+        "height": "100%",
         "margin-left": options.barSpacing + "px",
-        "color": options.labelColour,
-        "justify-content": "center",
-        "align-items": options.labelPosition
       }
     }
 
-    let $div = $("<div>", barAttributes);
-    $div.html('<h3>' + data[i] + '</h3>');
-    $(".bars").append($div);
+    $barDiv = $("<div>", barAttributes);
+    $(".bars").append($barDiv);
+
+    for (let j = 0; j < data[i].length; j++) {
+      let heightRatio = (data[i][j] / largest).toFixed(2);
+console.log(heightRatio);
+      let stackedBarAttributes = {
+        class: ".stacked-bar",
+        value: data[i][j], 
+        css: {
+          "display": "flex",
+          "flex": heightRatio,
+          "color": options.labelColour,
+          "align-items": options.labelPosition,
+          "background-color": options.barColour,
+          "border-radius": "2px",
+          "border": "1px solid rgb(172, 172, 172)",
+          "border-bottom": "none",
+        }
+      }
+
+      $stackedBar = $("<div>", stackedBarAttributes)
+      $stackedBar.html('<h3>' + data[i][j] + '</h3>');
+      $("#"+i).append($stackedBar);
+    }
   }
 
   let scaleSet = [largest];

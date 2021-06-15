@@ -173,15 +173,19 @@
 
     .bars div {
       display: flex;
-      background-color: rgb(18, 63, 214);
       flex: 1;
       border-radius: 2px;
       margin-left: 10px;
-      border: 1px solid rgb(172, 172, 172);
-      border-bottom: none;
+      flex-direction: column-reverse;
     }
 
-    .bars div:hover {
+    .stacked-bar {
+      background-color: rgb(18, 63, 214);
+      border: 1px solid rgb(172, 172, 172);
+      width:100%;
+    }
+
+    .stacked-bar div:hover {
       background-color: yellow !important;
     }
 
