@@ -182,10 +182,10 @@
     .stacked-bar {
       background-color: rgb(18, 63, 214);
       border: 1px solid rgb(172, 172, 172);
-      width:100%;
+      width: 100%;
     }
 
-    .stacked-bar div:hover {
+    .stacked-bar:hover {
       background-color: yellow !important;
     }
 
@@ -210,10 +210,20 @@
       position: absolute;
       top: 0;
     }
-    
+
     .label {
       flex: 1;
     }
+
+    .colours input {
+      display: table; 
+      display: table-cell;
+      border-spacing: 5px;
+      padding:5px;
+      border:1px; 
+      margin-bottom: 7px;
+    }
+
   </style>
 </head>
 
@@ -253,6 +263,16 @@
         <input type="text" id="y-axis" name="y-title">
       </li>
 
+      <div class="colours">
+        <p>Colour of your bars:</p>
+        <label for="red">First layer</label>
+        <input type="color" id="first-layer" name="barcolour" value="#FF0000">
+        <label for="red">Second layer</label>
+        <input type="color" id="second-layer" name="barcolour" value="#18CEFB">
+        <label for="red">Third layer</label>
+        <input type="color" id="third-layer" name="barcolour" value="#06D902">
+      </div>
+
       <div class="flex-inner">
         <div class="spacebetween">
           <p>Title font colour:</p>
@@ -269,68 +289,52 @@
         <div class="spacebetween">
           <p>Position of values:</p>
         </div>
-        <input type="radio" id="top" name="valpos" value="flex-start">
+        <input type="radio" id="top" name="valpos" value="top">
         <label for="top">Top</label>
         <input type="radio" id="centre" name="valpos" value="center" checked="checked">
         <label for="centre">Centre</label>
-        <input type="radio" id="bottom" name="valpos" value="flex-end">
+        <input type="radio" id="bottom" name="valpos" value="bottom">
         <label for="bottom">Bottom</label>
       </div>
 
-      <div class="flex-inner">
-        <div class="spacebetween">
-          <p>Colour of your bars:</p>
+        <div class="flex-inner">
+          <div class="spacebetween">
+            <p>Colour of your labels:</p>
+          </div>
+          <input type="radio" id="label-red" name="labelcolour" value="#FF0000">
+          <label for="red">Red</label>
+          <input type="radio" id="label-yellow" name="labelcolour" value="#FFBF00">
+          <label for="yellow">Yellow</label>
+          <input type="radio" id="label-blue" name="labelcolour" value="#6495ED">
+          <label for="blue">Blue</label>
+          <input type="radio" id="label-purple" name="labelcolour" value="#CCCCFF">
+          <label for="purple">Purple</label>
+          <input type="radio" id="label-teal" name="labelcolour" value="#40E0D0">
+          <label for="teal">Teal</label><br>
         </div>
-        <input type="radio" id="bar-red" name="barcolour" value="#FF0000">
-        <label for="red">Red</label>
-        <input type="radio" id="bar-yellow" name="barcolour" value="#FFBF00">
-        <label for="yellow">Yellow</label>
-        <input type="radio" id="bar-blue" name="barcolour" value="#6495ED">
-        <label for="blue">Blue</label>
-        <input type="radio" id="bar-purple" name="barcolour" value="#CCCCFF">
-        <label for="purple">Purple</label>
-        <input type="radio" id="bar-teal" name="barcolour" value="#40E0D0">
-        <label for="teal">Teal</label><br>
-      </div>
 
-      <div class="flex-inner">
-        <div class="spacebetween">
-          <p>Colour of your labels:</p>
+        <div class="flex-inner">
+          <div class="spacebetween">
+
+            <p>Bar spacing:</p>
+          </div>
+          <input type="radio" id="tight" name="barspace" value="1">
+          <label for="tight">Tight</label>
+          <input type="radio" id="medium" name="barspace" value="10" checked="checked">
+          <label for="centre">Medium</label>
+          <input type="radio" id="wide" name="barspace" value="20">
+          <label for="wide">Wide</label> <br>
         </div>
-        <input type="radio" id="label-red" name="labelcolour" value="#FF0000">
-        <label for="red">Red</label>
-        <input type="radio" id="label-yellow" name="labelcolour" value="#FFBF00">
-        <label for="yellow">Yellow</label>
-        <input type="radio" id="label-blue" name="labelcolour" value="#6495ED">
-        <label for="blue">Blue</label>
-        <input type="radio" id="label-purple" name="labelcolour" value="#CCCCFF">
-        <label for="purple">Purple</label>
-        <input type="radio" id="label-teal" name="labelcolour" value="#40E0D0">
-        <label for="teal">Teal</label><br>
+
+        <li>
+          <button>Create My Chart</button>
+        </li>
       </div>
-
-      <div class="flex-inner">
-        <div class="spacebetween">
-
-          <p>Bar spacing:</p>
-        </div>
-        <input type="radio" id="tight" name="barspace" value="1">
-        <label for="tight">Tight</label>
-        <input type="radio" id="medium" name="barspace" value="10" checked="checked">
-        <label for="centre">Medium</label>
-        <input type="radio" id="wide" name="barspace" value="20">
-        <label for="wide">Wide</label> <br>
-      </div>
-
-      <li>
-        <button>Create My Chart</button>
-      </li>
     </div>
-  </div>
 
-  <section class="container" id="out-chart-shell">
-    <section class="barchart hidden"></section>
-  </section>
+    <section class="container" id="out-chart-shell">
+      <section class="barchart hidden"></section>
+    </section>
 
 </body>
 

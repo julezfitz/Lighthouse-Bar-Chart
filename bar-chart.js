@@ -44,7 +44,9 @@ $(document).ready(function () {
       chartX: $("#x-axis").val(),
       chartY: $("#y-axis").val(),
       barSpacing: $('input[name=barspace]:checked').val(),
-      barColour: $('input[name=barcolour]:checked').val(),
+      barColour: $('input[name=barcolour]').val(),
+      barColour2: $('input[name=barcolour2]').val(),
+      barColour3: $('input[name=barcolour3]').val(),
       labelPosition: $('input[name=valpos]:checked').val(),
       labelColour: $('input[name=labelcolour]:checked').val(),
       barLabels,
@@ -95,6 +97,7 @@ let drawBarChart = function (data, options, element) {
   for (let i = 0; i < data.length; i++) {
     let $barDiv;
     let $stackedBar;
+    let layerColor;
 
     let barAttributes = {
       class: ".bars div",
@@ -112,16 +115,24 @@ let drawBarChart = function (data, options, element) {
 
     for (let j = 0; j < data[i].length; j++) {
       let heightRatio = (data[i][j] / largest).toFixed(2);
-console.log(heightRatio);
+
+      if(j === 0) {
+        layerColor = options.barColour;
+      } else if (j === 1) {
+        layerColor = options.barColour2;
+      } else if(j === 2) {
+      layerColor = options.barColour3;
+      }
+
       let stackedBarAttributes = {
-        class: ".stacked-bar",
-        value: data[i][j], 
+        class: "stacked-bar",
+        value: data[i][j],
         css: {
           "display": "flex",
           "flex": heightRatio,
           "color": options.labelColour,
-          "align-items": options.labelPosition,
-          "background-color": options.barColour,
+          "justify-content": options.labelPosition,
+          "background-color": layerColor,
           "border-radius": "2px",
           "border": "1px solid rgb(172, 172, 172)",
           "border-bottom": "none",
@@ -130,7 +141,7 @@ console.log(heightRatio);
 
       $stackedBar = $("<div>", stackedBarAttributes)
       $stackedBar.html('<h3>' + data[i][j] + '</h3>');
-      $("#"+i).append($stackedBar);
+      $("#" + i).append($stackedBar);
     }
   }
 
