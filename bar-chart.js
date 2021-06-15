@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  $("button").click(function () {
+  $("#create").click(function () {
     $(".popup").hide();
 
     let dataSet = $('#data-set').map(function () {
@@ -8,8 +8,6 @@ $(document).ready(function () {
 
     let dataString = dataSet.toString();
     let multiLineString = (dataString.split("\n"));
-    console.log(multiLineString);
-
     let barLabels = [];
     let barValuesArray = [];
     for (let i = 0; i < multiLineString.length; i++) {
@@ -34,9 +32,6 @@ $(document).ready(function () {
       finalDataSet.push(dataSetNums);
     }
 
-    console.log(barLabels);
-    console.log(finalDataSet);
-
     let options = {
       chartTitle: $("#title").val(),
       chartTitleFont: $("#title-size").val(),
@@ -44,9 +39,11 @@ $(document).ready(function () {
       chartX: $("#x-axis").val(),
       chartY: $("#y-axis").val(),
       barSpacing: $('input[name=barspace]:checked').val(),
-      barColour: $('input[name=barcolour]').val(),
-      barColour2: $('input[name=barcolour2]').val(),
-      barColour3: $('input[name=barcolour3]').val(),
+      barColour: $('input[id=first-layer]').val(),
+      barColour2: $('input[id=second-layer]').val(),
+      barColour3: $('input[id=third-layer]').val(),
+      barColour4: $('input[id=layer-4]').val(),
+      barColour5: $('input[id=layer-5]').val(),
       labelPosition: $('input[name=valpos]:checked').val(),
       labelColour: $('input[name=labelcolour]:checked').val(),
       barLabels,
@@ -54,7 +51,14 @@ $(document).ready(function () {
 
     let element = '.barchart';
 
-    $(".button").click(drawBarChart(finalDataSet, options, element));
+    $("#create").click(drawBarChart(finalDataSet, options, element));
+  });
+
+  let click = 4;
+  $("#moreColours").click(function () {
+    $(".colours").append('<label>Layer ' + click + '</label>');
+    $(".colours").append('<input type="color" id="layer-' + click + '" name="barcolour" value="#06D902">');
+    click++;
   });
 });
 
@@ -97,7 +101,7 @@ let drawBarChart = function (data, options, element) {
   for (let i = 0; i < data.length; i++) {
     let $barDiv;
     let $stackedBar;
-    let layerColor;
+    let layerColor = [options.barColour, options.barColour2, options.barColour3, options.barColour4, options.barColour5];
 
     let barAttributes = {
       class: ".bars div",
@@ -116,14 +120,6 @@ let drawBarChart = function (data, options, element) {
     for (let j = 0; j < data[i].length; j++) {
       let heightRatio = (data[i][j] / largest).toFixed(2);
 
-      if(j === 0) {
-        layerColor = options.barColour;
-      } else if (j === 1) {
-        layerColor = options.barColour2;
-      } else if(j === 2) {
-      layerColor = options.barColour3;
-      }
-
       let stackedBarAttributes = {
         class: "stacked-bar",
         value: data[i][j],
@@ -132,7 +128,7 @@ let drawBarChart = function (data, options, element) {
           "flex": heightRatio,
           "color": options.labelColour,
           "justify-content": options.labelPosition,
-          "background-color": layerColor,
+          "background-color": layerColor[j],
           "border-radius": "2px",
           "border": "1px solid rgb(172, 172, 172)",
           "border-bottom": "none",
