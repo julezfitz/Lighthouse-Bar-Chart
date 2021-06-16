@@ -80,6 +80,7 @@ $(document).ready(function () {
   $('.container').append('<button class = "edit-button hidden">Edit</button>');
   $(".edit-button").on('click', function () {
     $(".popup").show();
+    $(".barchart").empty();
   });
 });
 
