@@ -266,6 +266,19 @@
       font-family: Arial, Helvetica, sans-serif;
       font-size: 15px;
     }
+
+    .edit-button {
+      padding: 8px 16px;
+      border: none;
+      background: #333;
+      color: #f2f2f2;
+      text-transform: uppercase;
+      letter-spacing: .09em;
+      border-radius: 2px;
+      position: fixed;
+      right: 0;
+      bottom: 0;
+    }
   </style>
 </head>
 
@@ -307,11 +320,11 @@
       <div class="colours">
         <p>Colour of your bars:</p>
         <input type="text" class="colour-labels" id="lb-layer-1" name="layer-labels" placeholder="Layer 1">
-        <input type="color" id="first-layer" name="barcolour" value="#FF0000">
+        <input type="color" class="colorbl" id="first-layer" name="barcolour" value="#FF0000">
         <input type="text" class="colour-labels" id="lb-layer-2" name="layer-labels" placeholder="Layer 2">
-        <input type="color" id="second-layer" name="barcolour" value="#18CEFB">
+        <input type="color" class="colorbl" id="second-layer" name="barcolour" value="#18CEFB">
         <input type="text" class="colour-labels" id="lb-layer-3" name="layer-labels" placeholder="Layer 3">
-        <input type="color" id="third-layer" name="barcolour" value="#06D902">
+        <input type="color" class="colorbl" id="third-layer" name="barcolour" value="#06D902">
         <button id="moreColours" class="colour-button" style="width:60px;height:30px;">+</button>
       </div>
 
@@ -319,12 +332,7 @@
         <div class="spacebetween">
           <p>Title font colour:</p>
         </div>
-        <input type="radio" id="title-red" name="titlecolour" value="#FF0000">
-        <label for="red">Red</label>
-        <input type="radio" id="title-black" name="titlecolour" value="#000000" checked="checked">
-        <label for="black">Black</label>
-        <input type="radio" id="title-blue" name="titlecolour" value="#6495ED">
-        <label for="blue">Blue</label>
+        <input type="color" id="title-col" name="titlecolour" value="#5E6364">
       </div>
 
       <div class="flex-inner">
@@ -343,16 +351,7 @@
         <div class="spacebetween">
           <p>Colour of your labels:</p>
         </div>
-        <input type="radio" id="label-red" name="labelcolour" value="#FF0000">
-        <label for="red">Red</label>
-        <input type="radio" id="label-yellow" name="labelcolour" value="#FFBF00">
-        <label for="yellow">Yellow</label>
-        <input type="radio" id="label-blue" name="labelcolour" value="#6495ED">
-        <label for="blue">Blue</label>
-        <input type="radio" id="label-purple" name="labelcolour" value="#CCCCFF">
-        <label for="purple">Purple</label>
-        <input type="radio" id="label-teal" name="labelcolour" value="#40E0D0">
-        <label for="teal">Teal</label><br>
+        <input type="color" id="label-col" name="labelcolour" value="#FFFFFF">
       </div>
 
       <div class="flex-inner">

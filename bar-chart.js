@@ -36,17 +36,27 @@ $(document).ready(function () {
         finalDataSet.push(dataSetNums);
       }
 
+      let layerColoursArray = [];
+      $('input.colorbl').each(function () {
+        layerColoursArray.push($(this).val());
+      });
+
+      let layerLabelsArray = [];
+      $('input.colour-labels').each(function () {
+        layerLabelsArray.push($(this).val());
+      });
+
       let options = {
         chartTitle: $("#title").val(),
         chartTitleFont: $("#title-size").val(),
-        chartTitleColor: $('input[name=titlecolour]:checked').val(),
+        chartTitleColor: $("#title-col").val(),
         chartX: $("#x-axis").val(),
         chartY: $("#y-axis").val(),
         barSpacing: $('input[name=barspace]:checked').val(),
-        layerColor: [$('input[id=first-layer]').val(),$('input[id=second-layer]').val(),$('input[id=third-layer]').val(),$('input[id=layer-4]').val(),$('input[id=layer-5]').val(),],
-        labelsArray: [$('input[id=lb-layer-1]').val(), $('input[id=lb-layer-2]').val(), $('input[id=lb-layer-3]').val(), $('input[id=lb-layer-4]').val(), $('input[id=lb-layer-5]').val()],
+        layerColor: layerColoursArray,
+        labelsArray: layerLabelsArray,
         labelPosition: $('input[name=valpos]:checked').val(),
-        labelColour: $('input[name=labelcolour]:checked').val(),
+        labelColour: $("#label-col").val(),
         barLabels,
       }
 
@@ -58,17 +68,23 @@ $(document).ready(function () {
 
   let click = 4;
   $("#moreColours").click(function () {
-    if (click < 6) {
-      $(".colours").append('<input type="text" class = "colour-labels" id="lb-layer-' + click + '" name="layer-labels" placeholder ="Layer ' + click + ' 1"></input>');
-      $(".colours").append('<input type="color" id="layer-' + click + '" name="barcolour" value="#06D902">');
+    if (click < 11) {
+      $(".colours").append('<input type="text" class = "colour-labels" id="lb-layer-' + click + '" name="layer-labels" placeholder ="Layer ' + click + '"></input>');
+      $(".colours").append('<input type="color" class = "colorbl" id="layer-' + click + '" name="barcolour" value="#06D902">');
       click++;
     } else {
-      alert("You have reached the maximum number of layer colours");
+      alert("You have reached the maximum number of layer colours permitted");
     }
+  });
+
+  $('.container').append('<button class = "edit-button hidden">Edit</button>');
+  $(".edit-button").on('click', function () {
+    $(".popup").show();
   });
 });
 
 let drawBarChart = function (data, options, element) {
+  $('.edit-button').removeClass('hidden');
 
   $(element).append('<section class = "title">' + options.chartTitle + '</section>');
 
@@ -90,11 +106,11 @@ let drawBarChart = function (data, options, element) {
           "margin-left": "10px",
           "margin-bottom": "10px",
           "width": "20px",
-          "height":"10px",
-          "border":"rgb(172, 172, 172)",
+          "height": "10px",
+          "border": "rgb(172, 172, 172)",
         }
       }
-  
+
       $swatchDiv = $("<div>", swatchAttributes);
       $(".legend").append($swatchDiv);
     }
