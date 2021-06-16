@@ -81,6 +81,7 @@ $(document).ready(function () {
   $(".edit-button").on('click', function () {
     $(".popup").show();
     $(".barchart").empty();
+    $('.edit-button').addClass('hidden');
   });
 });
 
