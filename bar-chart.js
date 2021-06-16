@@ -1,64 +1,70 @@
 $(document).ready(function () {
   $("#create").click(function () {
-    $(".popup").hide();
 
-    let dataSet = $('#data-set').map(function () {
-      return $(this).val()
-    }).get();
+    if (!$("#data-set").val()) {
+      alert("Please enter your data set");
+    } else {
+      $(".popup").hide();
 
-    let dataString = dataSet.toString();
-    let multiLineString = (dataString.split("\n"));
-    let barLabels = [];
-    let barValuesArray = [];
-    for (let i = 0; i < multiLineString.length; i++) {
-      let label;
-      let output;
-      let breakPoint;
+      let dataSet = $('#data-set').map(function () {
+        return $(this).val()
+      }).get();
 
-      for (let j = 0; j < multiLineString[i].length; j++) {
-        label = multiLineString[i].substr(0, multiLineString[i].indexOf(':'));
-        breakPoint = multiLineString[i].split(":");
+      let dataString = dataSet.toString();
+      let multiLineString = (dataString.split("\n"));
+      let barLabels = [];
+      let barValuesArray = [];
+      for (let i = 0; i < multiLineString.length; i++) {
+        let label;
+        let output;
+        let breakPoint;
+
+        for (let j = 0; j < multiLineString[i].length; j++) {
+          label = multiLineString[i].substr(0, multiLineString[i].indexOf(':'));
+          breakPoint = multiLineString[i].split(":");
+        }
+        barLabels.push(label);
+        barValuesArray.push(breakPoint[breakPoint.length - 1]);
       }
-      barLabels.push(label);
-      barValuesArray.push(breakPoint[breakPoint.length - 1]);
-    }
 
-    let finalDataSet = [];
-    let dataSetNums;
-    for (let i = 0; i < barValuesArray.length; i++) {
-      for (let j = 0; j < barValuesArray[i].length; j++) {
-        dataSetNums = barValuesArray[i].split(',').map(Number);
+      let finalDataSet = [];
+      let dataSetNums;
+      for (let i = 0; i < barValuesArray.length; i++) {
+        for (let j = 0; j < barValuesArray[i].length; j++) {
+          dataSetNums = barValuesArray[i].split(',').map(Number);
+        }
+        finalDataSet.push(dataSetNums);
       }
-      finalDataSet.push(dataSetNums);
+
+      let options = {
+        chartTitle: $("#title").val(),
+        chartTitleFont: $("#title-size").val(),
+        chartTitleColor: $('input[name=titlecolour]:checked').val(),
+        chartX: $("#x-axis").val(),
+        chartY: $("#y-axis").val(),
+        barSpacing: $('input[name=barspace]:checked').val(),
+        layerColor: [$('input[id=first-layer]').val(),$('input[id=second-layer]').val(),$('input[id=third-layer]').val(),$('input[id=layer-4]').val(),$('input[id=layer-5]').val(),],
+        labelsArray: [$('input[id=lb-layer-1]').val(), $('input[id=lb-layer-2]').val(), $('input[id=lb-layer-3]').val(), $('input[id=lb-layer-4]').val(), $('input[id=lb-layer-5]').val()],
+        labelPosition: $('input[name=valpos]:checked').val(),
+        labelColour: $('input[name=labelcolour]:checked').val(),
+        barLabels,
+      }
+
+      let element = '.barchart';
+
+      $("#create").click(drawBarChart(finalDataSet, options, element));
     }
-
-    let options = {
-      chartTitle: $("#title").val(),
-      chartTitleFont: $("#title-size").val(),
-      chartTitleColor: $('input[name=titlecolour]:checked').val(),
-      chartX: $("#x-axis").val(),
-      chartY: $("#y-axis").val(),
-      barSpacing: $('input[name=barspace]:checked').val(),
-      barColour: $('input[id=first-layer]').val(),
-      barColour2: $('input[id=second-layer]').val(),
-      barColour3: $('input[id=third-layer]').val(),
-      barColour4: $('input[id=layer-4]').val(),
-      barColour5: $('input[id=layer-5]').val(),
-      labelPosition: $('input[name=valpos]:checked').val(),
-      labelColour: $('input[name=labelcolour]:checked').val(),
-      barLabels,
-    }
-
-    let element = '.barchart';
-
-    $("#create").click(drawBarChart(finalDataSet, options, element));
   });
 
   let click = 4;
   $("#moreColours").click(function () {
-    $(".colours").append('<label>Layer ' + click + '</label>');
-    $(".colours").append('<input type="color" id="layer-' + click + '" name="barcolour" value="#06D902">');
-    click++;
+    if (click < 6) {
+      $(".colours").append('<input type="text" class = "colour-labels" id="lb-layer-' + click + '" name="layer-labels" placeholder ="Layer ' + click + ' 1"></input>');
+      $(".colours").append('<input type="color" id="layer-' + click + '" name="barcolour" value="#06D902">');
+      click++;
+    } else {
+      alert("You have reached the maximum number of layer colours");
+    }
   });
 });
 
@@ -70,6 +76,29 @@ let drawBarChart = function (data, options, element) {
     "font-size": options.chartTitleFont + "px",
     "color": options.chartTitleColor,
   });
+
+  $(element).append('<div class = "legend"></div>');
+
+  for (let i = 0; i < options.labelsArray.length; i++) {
+    if (options.labelsArray[i]) {
+      $(".legend").append('<span class = "legend-labels">' + options.labelsArray[i] + '</span>');
+
+      let swatchAttributes = {
+        class: "colour-swatch",
+        css: {
+          "background-color": options.layerColor[i],
+          "margin-left": "10px",
+          "margin-bottom": "10px",
+          "width": "20px",
+          "height":"10px",
+          "border":"rgb(172, 172, 172)",
+        }
+      }
+  
+      $swatchDiv = $("<div>", swatchAttributes);
+      $(".legend").append($swatchDiv);
+    }
+  }
 
   $(element).append('<div class = "y-axis">' + options.chartY + '</div>');
 
@@ -101,8 +130,6 @@ let drawBarChart = function (data, options, element) {
   for (let i = 0; i < data.length; i++) {
     let $barDiv;
     let $stackedBar;
-    let layerColor = [options.barColour, options.barColour2, options.barColour3, options.barColour4, options.barColour5];
-
     let barAttributes = {
       class: ".bars div",
       id: i,
@@ -128,7 +155,7 @@ let drawBarChart = function (data, options, element) {
           "flex": heightRatio,
           "color": options.labelColour,
           "justify-content": options.labelPosition,
-          "background-color": layerColor[j],
+          "background-color": options.layerColor[j],
           "border-radius": "2px",
           "border": "1px solid rgb(172, 172, 172)",
           "border-bottom": "none",

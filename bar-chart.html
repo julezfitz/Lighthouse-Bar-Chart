@@ -82,8 +82,8 @@
     }
 
     .container {
-      margin: 70px 100px;
-      width: 100%;
+      margin: 20px 100px;
+      width: 600px;
       text-align: center;
     }
 
@@ -165,6 +165,7 @@
       font-family: Arial, Helvetica, sans-serif;
       color: white;
       display: flex;
+      max-width: 95%;
       flex-direction: row;
       align-items: flex-end;
       position: absolute;
@@ -173,7 +174,7 @@
 
     .bars div {
       display: flex;
-      flex: 1;
+      flex: 1 auto;
       border-radius: 2px;
       margin-left: 10px;
       flex-direction: column-reverse;
@@ -209,10 +210,13 @@
       width: 100%;
       position: absolute;
       top: 0;
+      justify-content: space-around;
     }
 
-    .label {
+    input[name="barcolour"] {
       flex: 1;
+      margin-left: 3px;
+      margin-right: 1px;
     }
 
     .colours input {
@@ -226,6 +230,41 @@
 
     .colour-button {
       float: right;
+      text-align: center;
+      font-size: 16px;
+      border: none;
+      border: none;
+      background: #333;
+      color: #f2f2f2;
+      text-transform: uppercase;
+      letter-spacing: .09em;
+      border-radius: 2px;
+    }
+
+    .colour-button:hover {
+      background-color: rgb(16, 139, 139);
+    }
+
+    .colour-labels {
+      width: 45px;
+      border-color: grey;
+      border-radius: 1px;
+      border-style: solid;
+      border-width: 1px;
+    }
+
+    .legend {
+      position: absolute;
+      top: 30%;
+      right: -20%;
+      display: flex;
+      flex-direction: column;
+      align-items: left;
+    }
+
+    .legend-labels {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 15px;
     }
   </style>
 </head>
@@ -247,14 +286,13 @@
         <p>Data set: <br>
           <i>Start each line with your label, followed by the data for that bar.</i>
         </p>
-        <!-- <input type="text" id="data-set" name="dataset[]"> -->
         <textarea id="data-set" name="dataset[]" rows="4" cols="30" placeholder="2021 : 81, 42, 11
 2020 : 21, 54, 21
 2019: 56, 11, 2"></textarea>
       </li>
       <li>
         <p>Title font size:</p>
-        <input type="number" id="title-size" name="title-size" placeholder="20">
+        <input type="number" id="title-size" name="title-size" value="20">
       </li>
 
       <li>
@@ -268,13 +306,13 @@
 
       <div class="colours">
         <p>Colour of your bars:</p>
-        <label>Layer 1</label>
+        <input type="text" class="colour-labels" id="lb-layer-1" name="layer-labels" placeholder="Layer 1">
         <input type="color" id="first-layer" name="barcolour" value="#FF0000">
-        <label>Layer 2</label>
+        <input type="text" class="colour-labels" id="lb-layer-2" name="layer-labels" placeholder="Layer 2">
         <input type="color" id="second-layer" name="barcolour" value="#18CEFB">
-        <label>Layer 3</label>
+        <input type="text" class="colour-labels" id="lb-layer-3" name="layer-labels" placeholder="Layer 3">
         <input type="color" id="third-layer" name="barcolour" value="#06D902">
-        <button id="moreColours" class = "colour-button">+</button>
+        <button id="moreColours" class="colour-button" style="width:60px;height:30px;">+</button>
       </div>
 
       <div class="flex-inner">
@@ -326,7 +364,7 @@
         <label for="tight">Tight</label>
         <input type="radio" id="medium" name="barspace" value="10" checked="checked">
         <label for="centre">Medium</label>
-        <input type="radio" id="wide" name="barspace" value="20">
+        <input type="radio" id="wide" name="barspace" value="40">
         <label for="wide">Wide</label> <br>
       </div>
 
